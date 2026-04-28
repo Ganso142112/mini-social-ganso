@@ -1,18 +1,69 @@
+// === ESTADO (dados da aplicação) === 
 let likeCount = 0;
-let curtido = false; // flag booleana
+let dislikeCount = 0;
+let curtido = false;
+let descurtido = false;
 
+// === SERVICE (regras de negócio)
 function curtir() {
-
-  if(curtido == false) {
+  if (curtido == false){
     likeCount++;
     curtido = true;
-  document.getElementById("likeCount").innerText = likeCount;
-  } else{
-likeCount--;
+    
+
+    if(descurtido == true){
+      dislikeCount--;
+      descurtido = false;
+    }
+
+  }else{
+    likeCount--;
     curtido = false;
-  document.getElementById("likeCount").innerText = likeCount;
   }
 
 }
 
-document.getElementById("likeBtn").addEventListener("click", curtir);
+function descurtir() {
+  if(descurtido == false){
+    dislikeCount++;
+    descurtido = true;
+    
+
+    if(curtido == true){
+      likeCount--;
+      curtido = false;
+    }
+
+  }
+  else{
+    dislikeCount--;
+    descurtido = false;
+  }
+}
+
+//=== VIEWS (interface)===
+
+function atualizarTela(){
+  document.getElementById("likeCount").innerText = likeCount;
+  document.getElementById("dislikeCount").innerText = dislikeCount;
+}
+
+//=== CONTROLLER (intermediação evento/regras de negócio)
+
+function clicarCurtir(){
+  curtir();
+  atualizarTela();
+}
+function clicarDescurtir(){
+  descurtir();
+  atualizarTela();
+}
+
+
+// === EVENTOS ====
+document.getElementById("likeBtn").addEventListener("click", clicarCurtir);
+document.getElementById("dislikeBtn").addEventListener("click", clicarDescurtir);
+
+// === INICIALIZAÇÃO DE TELA ===
+
+atualizarTela();
