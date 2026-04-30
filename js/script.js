@@ -1,4 +1,4 @@
-// === "BANCO DE DADOS (OBJETOS JSON SIMULADOS)" === 
+// === "BANCO DE DADOS (JSON Simulado)" === 
 
 let post = {
   likeCount: 0,
@@ -20,19 +20,19 @@ function curtir() {
     }
 
   }else{
-    likeCount--;
+    post.likeCount--;
     post.curtido = false;
   }
 
 }
 
-function post.descurtir() {
+function descurtir() {
   if(post.descurtido == false){
     post.dislikeCount++;
     post.descurtido = true;
     
 
-    if(curtido == true){
+    if(post.curtido == true){
       post.likeCount--;
       post.curtido = false;
     }
@@ -44,18 +44,20 @@ function post.descurtir() {
   }
 }
 
-// === API SIMULADA ===
+//=== API SIMULADA === 
 
 function getPost(){
   return post;
 }
+
 function likePost(){
-curtir ();
-return post;
+  curtir ();
+  return post;
 }
+
 function dislikePost(){
-descurtir ();
-return post;
+  descurtir ();
+  return post;
 }
 
 //=== VIEWS (interface)===
@@ -68,11 +70,11 @@ function atualizarTela(dados){
 //=== CONTROLLER (intermediação evento/regras de negócio)
 
 function clicarCurtir(){
-  let dados = likepost();
+  let dados = likePost();
   atualizarTela(dados);
 }
 function clicarDescurtir(){
-  let dados = dislikepost();
+  let dados = dislikePost();
   atualizarTela(dados);
 }
 
